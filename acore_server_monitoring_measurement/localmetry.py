@@ -25,8 +25,16 @@ class WorldServerStatusMeasurement(
             rds_status,
         ) = get_server_status(server)
 
-        soap_response = gm.ServerInfoRequest().send()
-        server_info_response = gm.ServerInfoResponse.from_soap_response(soap_response)
+        try:
+            soap_response = gm.ServerInfoRequest().send()
+            server_info_response = gm.ServerInfoResponse.from_soap_response(soap_response)
+            connected_players = server_info_response.connected_players,
+            characters_in_world = server_info_response.characters_in_world,
+            server_uptime = server_info_response.server_uptime,
+        except Exception:
+            connected_players = None
+            characters_in_world = None
+            server_uptime = None
 
         cpu_usage = psutil.cpu_percent(interval=1)
         virtual_memory = psutil.virtual_memory()
@@ -44,9 +52,9 @@ class WorldServerStatusMeasurement(
             is_rds_running=is_rds_running,
             ec2_status=ec2_status,
             rds_status=rds_status,
-            connected_players=server_info_response.connected_players,
-            characters_in_world=server_info_response.characters_in_world,
-            server_uptime=server_info_response.server_uptime,
+            connected_players=connected_players,
+            characters_in_world=characters_in_world,
+            server_uptime=server_uptime,
             cpu_usage=cpu_usage,
             memory_usage=memory_usage,
             total_memory=total_memory,
