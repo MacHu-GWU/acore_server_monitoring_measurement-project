@@ -185,6 +185,11 @@ if __name__ == "__main__":
         python_requires=">=3.8",
         install_requires=REQUIRES,
         extras_require=EXTRA_REQUIRE,
+        entry_points={
+            "console_scripts": [
+                "acorelocalmetry=acore_server_monitoring_measurement.cli.main:run",
+            ],
+        },
     )
 
 """
