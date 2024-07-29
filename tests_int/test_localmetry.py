@@ -13,5 +13,4 @@ class WorldServerStatusMeasurement(Base):
         billing_mode = pm.constants.PAY_PER_REQUEST_BILLING_MODE
 
 
-WorldServerStatusMeasurement.create_table(wait=True)
 WorldServerStatusMeasurement.measure_on_worldserver_ec2()

@@ -38,4 +38,4 @@ Pip install test dependencies::
 
 Run integration test::
 
-    /home/ubuntu/git_repos/acore_server_monitoring_measurement-project/.venv/bin/pytest /home/ubuntu/git_repos/acore_server_monitoring_measurement-project/tests_int -s
+    /home/ubuntu/git_repos/acore_server_monitoring_measurement-project/.venv/bin/python /home/ubuntu/git_repos/acore_server_monitoring_measurement-project/tests_int/test_localmetry.py
