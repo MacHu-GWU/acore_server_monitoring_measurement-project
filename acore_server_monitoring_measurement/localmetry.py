@@ -40,9 +40,9 @@ class WorldServerStatusMeasurement(
             server_info_response = gm.ServerInfoResponse.from_soap_response(
                 soap_response
             )
-            connected_players = (server_info_response.connected_players,)
-            characters_in_world = (server_info_response.characters_in_world,)
-            server_uptime = (server_info_response.server_uptime,)
+            connected_players = server_info_response.connected_players
+            characters_in_world = server_info_response.characters_in_world
+            server_uptime = server_info_response.server_uptime
         except Exception:
             connected_players = None
             characters_in_world = None

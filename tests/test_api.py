@@ -5,6 +5,8 @@ from acore_server_monitoring_measurement import api
 
 def test():
     _ = api
+    _ = api.Ec2RdsStatusMeasurement
+    _ = api.WorldServerStatusMeasurement
 
 
 if __name__ == "__main__":
