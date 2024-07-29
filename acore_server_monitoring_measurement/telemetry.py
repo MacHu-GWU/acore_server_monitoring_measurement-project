@@ -27,6 +27,7 @@ class Ec2RdsStatusMeasurement(
         cls,
         server_id_list: T.List[str],
         boto_ses: boto3.session.Session,
+        save: bool = True,
     ):
         """
         Measure EC2 and RDS status outside the worldserver EC2 instance.
@@ -40,6 +41,7 @@ class Ec2RdsStatusMeasurement(
             ec2_client=boto_ses.client("ec2"),
             rds_client=boto_ses.client("rds"),
         )
+        measurement_list = list()
         with cls.batch_write() as batch:
             for server_id, server in server.items():
                 if server is None:
@@ -70,40 +72,49 @@ class Ec2RdsStatusMeasurement(
                     ec2_status=ec2_status,
                     rds_status=rds_status,
                 )
-                batch.save(measurement)
+                measurement_list.append(measurement)
+                if save:
+                    batch.save(measurement)
+
+        return measurement_list
 
     @classmethod
     def measure_on_lambda(
         cls,
         server_id_list: T.List[str],
+        save: bool = True,
     ):
         """
         Measure EC2 and RDS status on AWS Lambda.
         """
         boto_ses = boto3.session.Session(region_name=os.environ["AWS_DEFAULT_REGION"])
-        cls.measure_on_outside(
+        return cls.measure_on_outside(
             server_id_list=server_id_list,
             boto_ses=boto_ses,
+            save=save,
         )
 
     @classmethod
     def measure_on_ec2(
         cls,
         server_id_list: T.List[str],
+        save: bool = True,
     ):
         """
         Measure EC2 and RDS status on another EC2 instance.
         """
         boto_ses = EC2MetadataCache.load().get_boto_ses_from_ec2_inside()
-        cls.measure_on_outside(
+        return cls.measure_on_outside(
             server_id_list=server_id_list,
             boto_ses=boto_ses,
+            save=save,
         )
 
     @classmethod
     def measure_on_github_action(
         cls,
         server_id_list: T.List[str],
+        save: bool = True,
     ):
         """
         Measure EC2 and RDS status on GitHub Action CI.

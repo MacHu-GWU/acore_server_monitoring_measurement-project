@@ -20,7 +20,10 @@ class WorldServerStatusMeasurement(
     """
 
     @classmethod
-    def measure_on_worldserver_ec2(cls):
+    def measure_on_worldserver_ec2(
+        cls,
+        save: bool = True,
+    ):
         """
         todo: docstring
         """
@@ -72,4 +75,6 @@ class WorldServerStatusMeasurement(
             total_memory=total_memory,
             available_memory=available_memory,
         )
-        measurement.save()
+        if save:
+            measurement.save()
+        return measurement

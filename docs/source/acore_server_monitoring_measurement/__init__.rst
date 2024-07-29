@@ -13,6 +13,7 @@ sub packages and modules
     cli <cli/__init__>
     api <api>
     constants <constants>
+    cron_job <cron_job>
     localmetry <localmetry>
     telemetry <telemetry>
     utils <utils>

@@ -37,3 +37,9 @@ def measure_worldserver():
     Measure worldserver status once.
     """
     WorldServerStatusMeasurement.measure_on_worldserver_ec2()
+
+
+def count_online_players():
+    """
+
+    """
