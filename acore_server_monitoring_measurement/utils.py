@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import typing as T
+import time
 from datetime import datetime, timezone, timedelta
 
 from acore_server_metadata.api import Server
@@ -48,3 +49,29 @@ def get_server_status(
         ec2_status,
         rds_status,
     )
+
+
+START = datetime(2024, 1, 1)
+
+
+def run():
+    print(f"{datetime.now()}")
+
+
+def every(seconds: int):
+    """
+    Execute tasks at precise N-second intervals, aligned with the clock.
+    The script runs at exact multiples of N seconds past the minute,
+    ensuring consistent timing. For instance, with N=30, executions occur at
+    :00 and :30 of each minute (e.g., 08:10:00, 08:10:30, 08:11:00)
+
+    Usage example::
+
+        for _ in every(30):
+            # do something
+    """
+    while 1:
+        elapsed = int((datetime.now() - START).total_seconds() * 1000)
+        div, mod = divmod(elapsed, seconds * 1000)
+        time.sleep((seconds * 1000 - mod) / 1000)
+        yield
