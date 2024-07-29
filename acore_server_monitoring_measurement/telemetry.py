@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+todo: docstring
+"""
+
 import typing as T
 import os
 
@@ -14,6 +18,9 @@ from .utils import get_create_at_expire_at, get_server_status
 class Ec2RdsStatusMeasurement(
     acore_server_monitoring_core.Ec2RdsStatusMeasurement,
 ):
+    """
+    todo: docstring
+    """
 
     @classmethod
     def measure_on_outside(
@@ -21,6 +28,12 @@ class Ec2RdsStatusMeasurement(
         server_id_list: T.List[str],
         boto_ses: boto3.session.Session,
     ):
+        """
+        Measure EC2 and RDS status outside the worldserver EC2 instance.
+
+        This method can be reused in many runtime environments,
+        such as AWS Lambda, EC2, GitHub Action CI, etc.
+        """
         create_at, expire_at = get_create_at_expire_at()
         server = Server.batch_get_server(
             ids=server_id_list,
@@ -64,6 +77,9 @@ class Ec2RdsStatusMeasurement(
         cls,
         server_id_list: T.List[str],
     ):
+        """
+        Measure EC2 and RDS status on AWS Lambda.
+        """
         boto_ses = boto3.session.Session(region_name=os.environ["AWS_DEFAULT_REGION"])
         cls.measure_on_outside(
             server_id_list=server_id_list,
@@ -75,8 +91,21 @@ class Ec2RdsStatusMeasurement(
         cls,
         server_id_list: T.List[str],
     ):
+        """
+        Measure EC2 and RDS status on another EC2 instance.
+        """
         boto_ses = EC2MetadataCache.load().get_boto_ses_from_ec2_inside()
         cls.measure_on_outside(
             server_id_list=server_id_list,
             boto_ses=boto_ses,
         )
+
+    @classmethod
+    def measure_on_github_action(
+        cls,
+        server_id_list: T.List[str],
+    ):
+        """
+        Measure EC2 and RDS status on GitHub Action CI.
+        """
+        raise NotImplementedError

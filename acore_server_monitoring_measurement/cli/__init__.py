@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
 
 """
-Soap Agent command line interface.
+server monitoring measurement command line user interface.
 """

@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+"""
+todo: docstring
+"""
 
 import psutil
 from acore_server_metadata.api import Server
@@ -12,8 +15,15 @@ from .utils import get_create_at_expire_at, get_server_status
 class WorldServerStatusMeasurement(
     acore_server_monitoring_core.WorldServerStatusMeasurement,
 ):
+    """
+    todo: docstring
+    """
+
     @classmethod
     def measure_on_worldserver_ec2(cls):
+        """
+        todo: docstring
+        """
         create_at, expire_at = get_create_at_expire_at()
         server = Server.from_ec2_inside()
         (
@@ -27,10 +37,12 @@ class WorldServerStatusMeasurement(
 
         try:
             soap_response = gm.ServerInfoRequest().send()
-            server_info_response = gm.ServerInfoResponse.from_soap_response(soap_response)
-            connected_players = server_info_response.connected_players,
-            characters_in_world = server_info_response.characters_in_world,
-            server_uptime = server_info_response.server_uptime,
+            server_info_response = gm.ServerInfoResponse.from_soap_response(
+                soap_response
+            )
+            connected_players = (server_info_response.connected_players,)
+            characters_in_world = (server_info_response.characters_in_world,)
+            server_uptime = (server_info_response.server_uptime,)
         except Exception:
             connected_players = None
             characters_in_world = None

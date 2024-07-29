@@ -9,6 +9,7 @@ from acore_server_monitoring_measurement.telemetry import (
 
 class Ec2RdsStatusMeasurement(Base):
     class Meta:
+        # you may need to change this table name
         table_name = "acore_server_monitoring_measurement-dev"
         region = "us-east-1"
         billing_mode = pm.constants.PAY_PER_REQUEST_BILLING_MODE

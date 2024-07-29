@@ -55,17 +55,14 @@ Welcome to ``acore_server_monitoring_measurement`` Documentation
 
 这个 Python 库提供了对服务器监控数据的采集功能. 它有两种模式:
 
-- localmetry: 本地监控数据采集, 需要将这个库安装在 EC2 游戏服务器 上, 然后的用一个脚本或是用
-- telemetry: 遥测. 可以从任何地方采集监控数据. 通常是一个 Lambda Function 上.
-
-``acore_server_monitoring_measurement``.
+- telemetry: 遥测. 可以从任何地方采集监控数据. 通常是把采集监控数据的代码放在 Lambda Function 上, 然后每 5 分钟运行一次既可.
+- localmetry: 本地监控数据采集, 需要将这个库安装在 EC2 游戏服务器 上, 然后的用 GNU Screen 将一个每 5 分钟采集一次数据的脚本放在后台运行既可实现监控数据的采集.
 
 
 .. _install:
 
 Install
 ------------------------------------------------------------------------------
-
 ``acore_server_monitoring_measurement`` is released on PyPI, so all you need is to:
 
 .. code-block:: console

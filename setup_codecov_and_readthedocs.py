@@ -11,7 +11,7 @@ to store your access token in the proper location on your laptop.
 Requirements::
 
     pip install "requests>=2.29.0,<3.0.0"
-    pip install "PyGithub>=2.1.1,<3.0.0"®
+    pip install "PyGithub>=2.1.1,<3.0.0"
 """
 
 from pathlib import Path
