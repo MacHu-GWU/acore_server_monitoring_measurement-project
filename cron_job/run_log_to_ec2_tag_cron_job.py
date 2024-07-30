@@ -13,4 +13,4 @@ you should see the EC2 AWS tags got updated every 1 minutes::
 
 from acore_server_monitoring_measurement.cron_job import run_log_to_ec2_tag_cron_job
 
-run_log_to_ec2_tag_cron_job()
+run_log_to_ec2_tag_cron_job(delay=60, verbose=True)

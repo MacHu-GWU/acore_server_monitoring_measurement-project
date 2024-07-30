@@ -43,6 +43,7 @@ def get_env_name() -> str:
 
 def run_measure_worldserver_cron_job(
     delay: int = 300,
+    verbose: bool = True,
 ):
     """
     Measure the worldserver status every 5 minutes.
@@ -60,12 +61,13 @@ def run_measure_worldserver_cron_job(
             region = "us-east-1"
             billing_mode = pm.constants.PAY_PER_REQUEST_BILLING_MODE
 
-    for _ in every(seconds=delay):
+    for _ in every(seconds=delay, verbose=verbose):
         WorldServerStatusMeasurement.measure_on_worldserver_ec2()
 
 
 def run_log_to_ec2_tag_cron_job(
     delay: int = 60,
+    verbose: bool = True,
 ):
     """
     Put worldserver status measurement to EC2 tags every 1 minutes.
@@ -77,7 +79,7 @@ def run_log_to_ec2_tag_cron_job(
 
     WorldServerStatusMeasurement = Base
 
-    for _ in every(seconds=delay):
+    for _ in every(seconds=delay, verbose=verbose):
         measurement = WorldServerStatusMeasurement.measure_on_worldserver_ec2(
             save=False
         )

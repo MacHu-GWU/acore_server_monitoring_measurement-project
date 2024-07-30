@@ -51,7 +51,7 @@ def get_server_status(
     )
 
 
-START = datetime(2024, 1, 1)
+START = get_utc_now().replace(hour=0, minute=0, second=0, microsecond=0)
 
 
 def run():
@@ -80,7 +80,7 @@ def every(
         if verbose:
             until_time = START + timedelta(seconds=(div + 1) * seconds)
             print(
-                f"\twaiting {wait_secs} seconds until {until_time} for the next run...",
+                f"\rwait {wait_secs} seconds till {until_time} for the next run ...",
                 end="",
                 flush=True,
             )
