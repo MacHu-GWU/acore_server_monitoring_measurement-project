@@ -1,4 +1,4 @@
-Localmetry
+How Localmetry Works
 ==============================================================================
 本文将详细介绍如何用这个库来定时采集 worldserver 游戏服务器的性能数据.
 
@@ -33,7 +33,7 @@ Localmetry
 
 **采集脚本**
 
-`cron_job/run_log_to_ec2_tag_cron_job.py <https://github.com/MacHu-GWU/acore_server_monitoring_measurement-project/blob/main/cron_job/run_log_to_ec2_tag_cron_job.py>`_ 和 `cron_job/run_measure_worldserver_cron_job.py <https://github.com/MacHu-GWU/acore_server_monitoring_measurement-project/blob/main/cron_job/run_measure_worldserver_cron_job.py>`_ 是用于在 GNU Screen 中后台运行的脚本. 它们会每隔一段时间就采集一次数据. 这两个脚本分别对应中层封装中的两个函数.
+`cron_job/run_log_to_ec2_tag_cron_job.py <https://github.com/MacHu-GWU/acore_server_monitoring_measurement-project/blob/main/cron_job/run_log_to_ec2_tag_cron_job.py>`_ 和 `cron_job/run_measure_worldserver_cron_job.py <https://github.com/MacHu-GWU/acore_server_monitoring_measurement-project/blob/main/cron_job/run_measure_worldserver_cron_job.py>`_ 是用于在 GNU Screen 中后台运行的脚本. 它们会每隔一段时间就采集一次数据. 这两个脚本分别对应中层封装中的两个函数. 这两个脚本会在 `acore_server_bootstrap 项目中的 Check server status <https://acore-server-bootstrap.readthedocs.io/en/latest/search.html?q=Check+Server+Status&check_keywords=yes&area=default>`_ 功能中被调用.
 
 **EC2 Init**
 
