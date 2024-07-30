@@ -10,8 +10,6 @@ import fire
 
 from .._version import __version__
 
-from .impl import measure_worldserver
-
 
 class Command:
     """
@@ -30,14 +28,6 @@ class Command:
         Print version number.
         """
         print(__version__)
-
-    def measure_worldserver(
-        self,
-    ):
-        """
-        Measure WorldServer status.
-        """
-        measure_worldserver()
 
 
 def run():
