@@ -58,7 +58,10 @@ def run():
     print(f"{datetime.now()}")
 
 
-def every(seconds: int):
+def every(
+    seconds: int,
+    verbose: bool = True,
+):
     """
     Execute tasks at precise N-second intervals, aligned with the clock.
     The script runs at exact multiples of N seconds past the minute,
@@ -73,5 +76,9 @@ def every(seconds: int):
     while 1:
         elapsed = int((datetime.now() - START).total_seconds() * 1000)
         div, mod = divmod(elapsed, seconds * 1000)
-        time.sleep((seconds * 1000 - mod) / 1000)
+        wait_secs = (seconds * 1000 - mod) / 1000
+        if verbose:
+            until_time = START + timedelta(seconds=(div + 1) * seconds)
+            print(f"waiting {wait_secs} seconds until {until_time} for the next run...")
+        time.sleep(wait_secs)
         yield
