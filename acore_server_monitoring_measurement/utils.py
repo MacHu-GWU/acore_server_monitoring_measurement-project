@@ -74,13 +74,13 @@ def every(
             # do something
     """
     while 1:
-        elapsed = int((datetime.now() - START).total_seconds() * 1000)
+        elapsed = int((get_utc_now() - START).total_seconds() * 1000)
         div, mod = divmod(elapsed, seconds * 1000)
         wait_secs = (seconds * 1000 - mod) / 1000
         if verbose:
             until_time = START + timedelta(seconds=(div + 1) * seconds)
             print(
-                f"\rwait {wait_secs} seconds till {until_time} for the next run ...",
+                f"\rwait {wait_secs} seconds till {until_time.isoformat()} for the next run ...",
                 end="",
                 flush=True,
             )
