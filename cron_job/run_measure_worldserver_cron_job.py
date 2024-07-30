@@ -1,4 +1,4 @@
-#!/usr/bin/env /home/ubuntu/git_repos/acore_server_monitoring_measurement-project/.venv/bin/python
+#!/home/ubuntu/git_repos/acore_server_monitoring_measurement-project/.venv/bin/python
 # -*- coding: utf-8 -*-
 
 """
