@@ -11,6 +11,6 @@ you should see one item is created every 5 minutes in DynamoDB table::
     /home/ubuntu/git_repos/acore_server_monitoring_measurement-project/.venv/bin/python /home/ubuntu/git_repos/acore_server_monitoring_measurement-project/cron_job/run_measure_worldserver_cron_job.py
 """
 
-from acore_server_monitoring_measurement.cron_job import run_log_to_ec2_tag_cron_job
+from acore_server_monitoring_measurement.cron_job import run_measure_worldserver_cron_job
 
-run_log_to_ec2_tag_cron_job()
+run_measure_worldserver_cron_job()

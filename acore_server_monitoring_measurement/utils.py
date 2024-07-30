@@ -79,6 +79,10 @@ def every(
         wait_secs = (seconds * 1000 - mod) / 1000
         if verbose:
             until_time = START + timedelta(seconds=(div + 1) * seconds)
-            print(f"waiting {wait_secs} seconds until {until_time} for the next run...")
+            print(
+                f"\twaiting {wait_secs} seconds until {until_time} for the next run...",
+                end="",
+                flush=True,
+            )
         time.sleep(wait_secs)
         yield
