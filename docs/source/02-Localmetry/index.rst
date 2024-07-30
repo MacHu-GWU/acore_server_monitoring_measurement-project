@@ -16,33 +16,24 @@ Localmetry
 
 **中层封装**
 
-`acore_server_monitoring_measurement/cli/impl.py <https://github.com/MacHu-GWU/acore_server_monitoring_measurement-project/blob/main/acore_server_monitoring_measurement/cli/impl.py>`_ 实现了一个 :func:`~acore_server_monitoring_measurement.cli.impl.measure_worldserver` 函数. **它只能在 worldserver 所在的 EC2 的环境中运行**, 能自动检测本机的 server_id, 定位到 DynamoDB table, 并采集 worldserver 的统计数据.
+`acore_server_monitoring_measurement/cron_job.py <https://github.com/MacHu-GWU/acore_server_monitoring_measurement-project/blob/main/acore_server_monitoring_measurement/cron_job.py>`_ 实现了两个重要函数:
 
-.. dropdown:: acore_server_monitoring_measurement/cli/impl.py
+- :func:`~acore_server_monitoring_measurement.cron_job.run_measure_worldserver_cron_job`: 采集 worldserver 的统计数据并发送到 DynamoDB table 中. 这个 cron job 主要是为了采集一段时间内的历史数据.
+- :func:`~acore_server_monitoring_measurement.cron_job.run_log_to_ec2_tag_cron_job`: 采集 worldserver 的统计数据并将其写入到 EC2 AWS Tag. 这个 cron job 主要是为了采集实时数据并给人类看的.
 
-    .. literalinclude:: ../../../acore_server_monitoring_measurement/cli/impl.py
+.. important::
+
+    这两个函数只能在 worldserver 所在的 EC2 的环境中运行**, 能自动检测本机的 server_id, 定位到 DynamoDB table 或 EC2 AWS Tag.
+
+.. dropdown:: acore_server_monitoring_measurement/cron_job.py
+
+    .. literalinclude:: ../../../acore_server_monitoring_measurement/cron_job.py
        :language: python
        :linenos:
 
 **采集脚本**
 
-`scripts/measure_worldserver.py <https://github.com/MacHu-GWU/acore_server_monitoring_measurement-project/blob/main/scripts/measure_worldserver.py>`_ 是一个脚本, 它仅仅是 import 了中层封装, 作为一个可供任何调度程序所使用的采集脚本. 每次运行它就能进行一次采集.
-
-.. dropdown:: scripts/measure_worldserver.py
-
-    .. literalinclude:: ../../../scripts/measure_worldserver.py
-       :language: python
-       :linenos:
-
-**定时任务**
-
-`scripts/measure_worldserver_cron_job.shy <https://github.com/MacHu-GWU/acore_server_monitoring_measurement-project/blob/main/scripts/measure_worldserver_cron_job.sh>`_ 是一个 shell script 脚本, 它可以被放在 GNU Screen session 中后台运行, 每隔一段时间就运行一次上面的采集脚本.
-
-.. dropdown:: scripts/measure_worldserver_cron_job.sh
-
-    .. literalinclude:: ../../../scripts/measure_worldserver_cron_job.sh
-       :language: python
-       :linenos:
+`cron_job/run_log_to_ec2_tag_cron_job.py <https://github.com/MacHu-GWU/acore_server_monitoring_measurement-project/blob/main/cron_job/run_log_to_ec2_tag_cron_job.py>`_ 和 `cron_job/run_measure_worldserver_cron_job.py <https://github.com/MacHu-GWU/acore_server_monitoring_measurement-project/blob/main/cron_job/run_measure_worldserver_cron_job.py>`_ 是用于在 GNU Screen 中后台运行的脚本. 它们会每隔一段时间就采集一次数据. 这两个脚本分别对应中层封装中的两个函数.
 
 **EC2 Init**
 

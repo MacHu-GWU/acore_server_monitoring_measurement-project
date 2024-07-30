@@ -15,6 +15,14 @@ x.y.z (Backlog)
 **Miscellaneous**
 
 
+0.2.1 (2024-07-29)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+- Add ``cron_job/run_log_to_ec2_tag_cron_job.py`` and ``cron_job/run_measure_worldserver_cron_job.py`` for GNU screen session.
+- Removed the useless ``acorelocalmetry measure_worldserver`` CLI command.
+
+
 0.1.1 (2024-07-29)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
